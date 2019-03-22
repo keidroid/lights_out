@@ -1,4 +1,5 @@
 *.DS_Store
+android/.gradle/
 
 # See https://www.dartlang.org/guides/libraries/private-files
 

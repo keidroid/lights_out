@@ -70,3 +70,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+
+  assets:
+  - assets/
+
+  fonts:
+  - family: Roboto
+    fonts:
+    - asset: assets/Roboto-Thin.ttf
