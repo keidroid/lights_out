@@ -9,20 +9,9 @@ import 'package:flutter/services.dart';
 main() => LightsOut().run();
 
 class LightsOut {
-  final W = 720.0, H = 1280.0, P = 120.0, PS = 140.0;
-  var x = 0.0;
-  var touchedX = -1;
-  var touchedY = -1;
-  var realTouchedX = -1;
-  var realTouchedY = -1;
-  var isTouched = false;
-  var effect = 0;
-  var frame = 0;
-  int step = 0;
-  int clear = 0;
-  int stage = 0;
-  State current = State.Clear;
-  State next = State.Title;
+  static const W = 720.0, H = 1280.0, P = 120.0, Q = 140.0, X = 20.0, Y = 400.0;
+  int frame = 0, step = 0, clear = 0, stage = 0, state = 9, next = 0, diff = 0;
+  double rot = 0.0;
   List<List<int>> panels;
 
   run() {
@@ -32,23 +21,21 @@ class LightsOut {
   }
 
   update(Duration timeStamp) {
-    if (current != next) {
-      current = next;
-      if (current == State.Title) {
-        resetPanels();
-      }
-      if (current == State.Stage) {
-        loadAsset();
-      }
+    if (state != next) {
+      if (next == 0) reset();
+      if (next == 1) loadStage();
+      state = next;
+      diff = 8;
     }
-
-    if (timeStamp.inMilliseconds - frame >= 100) {
-      effect = max(effect - 1, 0);
-      frame = timeStamp.inMilliseconds;
+    var ms = timeStamp.inMilliseconds;
+    if (ms - frame >= 100) {
+      frame = ms;
     }
-    var delta = (timeStamp.inMilliseconds - frame) / 1000;
+    var delta = (ms - frame) / 1000;
 
-    x += 0.8 * delta;
+    rot += 0.8 * delta;
+    diff = max(0, diff - 1);
+
     var dpr = window.devicePixelRatio;
     var paintBounds = Offset.zero & (window.physicalSize / dpr);
     var logicalSize = window.physicalSize / dpr;
@@ -68,89 +55,88 @@ class LightsOut {
     var c = Canvas(r, physicalBounds);
 
     c.scale(ratio, ratio);
-    c.drawRect(screen(), Paint()..shader = linearGradient());
+    c.drawRect(screen, Paint()..shader = linearGradient);
 
-    var p = Paint();
-    p.style = PaintingStyle.fill;
-    p.color = Color(0x10ffffff);
-    p.strokeWidth = 1.5;
-    p.maskFilter = MaskFilter.blur(BlurStyle.solid, 4);
+    var bg = Paint()
+      ..color = Color(0x10ffffff)
+      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 4);
 
     c.save();
-    c.translate(360, 720);
-    c.rotate(x);
-    c.drawOval(Rect.fromLTRB(-320.0, -300.0, 320.0, 300.0), p);
-    c.drawOval(Rect.fromLTRB(-300.0, -320.0, 300.0, 320.0), p);
+    c.translate(360, 740);
+    c.rotate(rot);
+    c.drawOval(Rect.fromLTRB(-320.0, -300.0, 320.0, 300.0), bg);
+    c.drawOval(Rect.fromLTRB(-300.0, -320.0, 300.0, 320.0), bg);
     c.restore();
 
-    var p2 = Paint()
+    var on = Paint()
       ..color = Color(0xaaffffff)
-      ..style = PaintingStyle.fill
-      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 12);
+      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 50);
 
-    var p3 = Paint()
-      ..color = Color(0x80ffffff)
+    var off = Paint()
+      ..color = Color(0xaaffffff)
       ..style = PaintingStyle.stroke
-      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 3)
-      ..strokeWidth = 2.0;
+      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 5);
 
-    int s = 1;
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 5; x++) {
-        c.drawRRect(RRect.fromRectXY(Rect.fromLTWH(20 + PS * x, 400 + PS * y, P, P), 8, 8), panels[y][x] > 0 ? p2 : p3);
-        if (current == State.Title) {
-          drawText(c, '$s', 64, Offset(44 + PS * x, 424 + PS * y));
+        c.drawRRect(RRect.fromRectXY(Rect.fromLTWH(X + Q * x, Y + Q * y, P, P), 8, 8), panels[y][x] > 0 ? on : off);
+        if (state == 0) {
+          drawText(c, '${y * 5 + x + 1}', 64, Offset(44 + Q * x, 424 + Q * y));
         }
-        s++;
       }
     }
 
-    if (current == State.Title) {
+    if (state == 0) {
       drawText(c, 'Lights Out', 128, Offset(80, 160));
-    } else if (current == State.Clear) {
-      drawText(c, 'Stage Clear!!', 96, Offset(-40, 160));
-    } else if (current == State.Failed) {
-      drawText(c, 'Stage Failed..', 96, Offset(-40, 160));
     } else {
-      drawText(c, 'Step', 64, Offset(20, 240));
+      drawText(c, 'Stage', 64, Offset(40, 180));
+      drawText(c, '$stage', 128, Offset(40, 240));
+      drawText(c, 'Step', 64, Offset(360, 180));
       drawText(c, '$step / $clear', 128, Offset(360, 240));
+    }
+    if (state == 3) {
+      drawText(c, 'Success!', 96, Offset(160, 1080.0 + diff * diff));
+    }
+    if (state == 4) {
+      drawText(c, 'Failed..', 96, Offset(220, 1080.0 + diff * diff));
     }
     return r.endRecording();
   }
 
   handlePointerDataPacket(PointerDataPacket packet) {
-    var ratio = window.physicalSize.width / W;
+    var r = window.physicalSize.width / W;
 
-    for (PointerData datum in packet.data) {
-      var touchX = (datum.physicalX / ratio - 20) / PS;
-      var touchY = (datum.physicalY / ratio - 400) / PS;
-
-      var x = (0.0 < touchX && touchX < 5.0) ? touchX.floor() : -1;
-      var y = (0.0 < touchY && touchY < 5.0) ? touchY.floor() : -1;
+    for (var datum in packet.data) {
+      var tx = (datum.physicalX / r - X) / Q;
+      var ty = (datum.physicalY / r - Y) / Q;
+      var x = (0.0 < tx && tx < 5.0) ? tx.floor() : -1;
+      var y = (0.0 < ty && ty < 5.0) ? ty.floor() : -1;
 
       if (datum.change == PointerChange.up) {
         if (0 > x || 0 > y) break;
-        if (current == State.Game) {
+        if (state == 2) {
           toggleX(x, y);
-          step = min(step + 1, 99);
-          if (isClearPanels()) {
-            next = State.Clear;
+          step++;
+          if (isOuts()) {
+            next = 3;
           } else if (clear == step) {
-            next = State.Failed;
+            next = 4;
           }
-          print(':: $step :: $clear');
-        } else if (current == State.Title) {
-          next = State.Stage;
+        } else if (state == 0) {
           stage = y * 5 + x + 1;
-        } else if (current == State.Clear || current == State.Failed) {
-          next = State.Title;
+          next = 1;
+        } else if (state > 2) {
+          next = 0;
         }
       }
       break;
     }
   }
 
-  resetPanels() => panels = List.generate(5, (_) => List.generate(5, (_) => 0));
+  reset() {
+    step = 0;
+    panels = List.generate(5, (_) => List.generate(5, (_) => 0));
+  }
 
   toggleX(int x, int y) {
     toggle(x, y);
@@ -162,50 +148,34 @@ class LightsOut {
 
   toggle(int x, int y) => panels[y][x] = (panels[y][x] + 1) % 2;
 
-  isClearPanels() {
-    for (var line in panels) {
-      for (var p in line) {
-        if (p > 0) return false;
-      }
-    }
+  isOuts() {
+    for (var y in panels) for (var x in y) if (x > 0) return false;
     return true;
   }
 
-  onPanel(int x, int y) => panels[y][x] = 2;
-
-  screen() => Rect.fromLTWH(0, 0, W, H);
-
-  textStyle(double size, {bool on = true}) =>
-      ui.TextStyle(fontFamily: 'Roboto', color: Color(on ? 0xffffffff : 0x88ffffff), fontSize: size);
-
-  drawText(Canvas c, String text, double size, Offset p) {
+  drawText(Canvas c, String text, double size, Offset o) {
     var builder = ParagraphBuilder(ParagraphStyle())
-      ..pushStyle(textStyle(size))
+      ..pushStyle(ui.TextStyle(fontFamily: 'Roboto-Thin', color: Color(0xddffffff), fontSize: size))
       ..addText(text);
-    c.drawParagraph(builder.build()..layout(ParagraphConstraints(width: W)), p);
+    c.drawParagraph(builder.build()..layout(ParagraphConstraints(width: W)), o);
   }
 
-  linearGradient() => LinearGradient(
+  loadStage() async {
+    var j = await rootBundle.loadString('assets/$stage.json');
+    var c = json.decode(j);
+    clear = 0;
+    for (int p in c['s']) {
+      toggleX(p % 5, p ~/ 5);
+      clear++;
+    }
+    next = 2;
+  }
+
+  get screen => Offset.zero & Size(W, H);
+
+  get linearGradient => LinearGradient(
         colors: <Color>[Color(0xff101010), Color(0xff204060)],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-      ).createShader(screen());
-
-  loadAsset() async {
-    var a = await rootBundle.loadString('assets/$stage.json');
-    var conf = json.decode(a);
-    print('${conf['title']}');
-
-    clear = 0;
-    for (int p in conf['step']) {
-      print('step: $p');
-      toggleX(p % 5, (p / 5).floor());
-      clear++;
-    }
-    step = 0;
-
-    next = State.Game;
-  }
+      ).createShader(screen);
 }
-
-enum State { Title, Stage, Game, Clear, Failed }

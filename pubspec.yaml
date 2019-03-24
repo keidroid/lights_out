@@ -75,6 +75,6 @@ flutter:
   - assets/
 
   fonts:
-  - family: Roboto
+  - family: Roboto-Thin
     fonts:
     - asset: assets/Roboto-Thin.ttf
