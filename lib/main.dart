@@ -13,6 +13,7 @@ class LightsOut {
   int frame = 0, step = 0, clear = 0, stage = 0, state = 9, next = 0, diff = 0;
   double rot = 0.0;
   List<List<int>> panels;
+  List<int> succeeded = List.generate(25, (_) => 0);
 
   run() {
     window.onPointerDataPacket = handlePointerDataPacket;
@@ -42,7 +43,7 @@ class LightsOut {
     var physicalBounds = Offset.zero & (logicalSize * dpr);
     var sb = SceneBuilder()
       ..pushClipRect(physicalBounds)
-      ..addPicture(Offset(0, 0), paint(paintBounds))
+      ..addPicture(Offset.zero, paint(paintBounds))
       ..pop();
     window.render(sb.build());
     window.scheduleFrame();
@@ -55,11 +56,11 @@ class LightsOut {
     var c = Canvas(r, physicalBounds);
 
     c.scale(ratio, ratio);
-    c.drawRect(screen, Paint()..shader = linearGradient);
+    c.drawRect(screen, Paint()..shader = gradient);
 
     var bg = Paint()
       ..color = Color(0x10ffffff)
-      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 4);
+      ..maskFilter = solid(5);
 
     c.save();
     c.translate(360, 740);
@@ -70,35 +71,35 @@ class LightsOut {
 
     var on = Paint()
       ..color = Color(0xaaffffff)
-      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 50);
+      ..maskFilter = solid(50);
 
     var off = Paint()
       ..color = Color(0xaaffffff)
       ..style = PaintingStyle.stroke
-      ..maskFilter = MaskFilter.blur(BlurStyle.solid, 5);
+      ..maskFilter = solid(5);
 
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 5; x++) {
         c.drawRRect(RRect.fromRectXY(Rect.fromLTWH(X + Q * x, Y + Q * y, P, P), 8, 8), panels[y][x] > 0 ? on : off);
         if (state == 0) {
-          drawText(c, '${y * 5 + x + 1}', 64, Offset(44 + Q * x, 424 + Q * y));
+          text(c, '${y * 5 + x + 1}', 64, 44 + Q * x, 424 + Q * y, succeeded[y * 5 + x] == 0);
         }
       }
     }
 
     if (state == 0) {
-      drawText(c, 'Lights Out', 128, Offset(80, 160));
+      text(c, 'Lights Out', 128, 80, 160);
     } else {
-      drawText(c, 'Stage', 64, Offset(40, 180));
-      drawText(c, '$stage', 128, Offset(40, 240));
-      drawText(c, 'Step', 64, Offset(360, 180));
-      drawText(c, '$step / $clear', 128, Offset(360, 240));
+      text(c, 'Stage', 64, 40, 180);
+      text(c, '$stage', 128, 40, 240);
+      text(c, 'Step', 64, 360, 180);
+      text(c, '$step / $clear', 128, 360, 240);
     }
     if (state == 3) {
-      drawText(c, 'Success!', 96, Offset(160, 1080.0 + diff * diff));
+      text(c, 'Success!', 96, 160, 1080.0 + diff * diff);
     }
     if (state == 4) {
-      drawText(c, 'Failed..', 96, Offset(220, 1080.0 + diff * diff));
+      text(c, 'Failed..', 96, 220, 1080.0 + diff * diff);
     }
     return r.endRecording();
   }
@@ -118,6 +119,7 @@ class LightsOut {
           toggleX(x, y);
           step++;
           if (isOuts()) {
+            succeeded[stage - 1] = 1;
             next = 3;
           } else if (clear == step) {
             next = 4;
@@ -153,11 +155,11 @@ class LightsOut {
     return true;
   }
 
-  drawText(Canvas c, String text, double size, Offset o) {
+  text(Canvas c, String text, double size, double x, double y, [bool on = true]) {
     var builder = ParagraphBuilder(ParagraphStyle())
-      ..pushStyle(ui.TextStyle(fontFamily: 'Roboto-Thin', color: Color(0xddffffff), fontSize: size))
+      ..pushStyle(ui.TextStyle(fontFamily: 'Roboto-Thin', color: Color(on ? 0xddffffff : 0x44ffffff), fontSize: size))
       ..addText(text);
-    c.drawParagraph(builder.build()..layout(ParagraphConstraints(width: W)), o);
+    c.drawParagraph(builder.build()..layout(ParagraphConstraints(width: W)), Offset(x, y));
   }
 
   loadStage() async {
@@ -171,9 +173,11 @@ class LightsOut {
     next = 2;
   }
 
+  solid(double s) => MaskFilter.blur(BlurStyle.solid, s);
+
   get screen => Offset.zero & Size(W, H);
 
-  get linearGradient => LinearGradient(
+  get gradient => LinearGradient(
         colors: <Color>[Color(0xff101010), Color(0xff204060)],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,

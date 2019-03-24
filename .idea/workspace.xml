@@ -2,64 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e1acb1c-cedc-4d8c-a419-c93468f5d44b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/10.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/11.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/12.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/13.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/14.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/15.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/16.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/17.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/18.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/19.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/20.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/21.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/22.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/23.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/24.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/25.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/4.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/5.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/6.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/7.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/8.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/9.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/10.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/11.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/12.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/13.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/14.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/15.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/16.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/17.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/18.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/19.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/20.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/21.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/22.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/23.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/24.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/25.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/4.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/5.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/6.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/7.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/8.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/9.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/FontManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/FontManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/1.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/2.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/assets/2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +24,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="19" />
+          <entry key="dart" value="20" />
           <entry key="java" value="2" />
           <entry key="json" value="9" />
           <entry key="ttf" value="3" />
@@ -88,7 +33,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="19" />
+          <entry key="Dart" value="20" />
           <entry key="Font" value="3" />
           <entry key="JAVA" value="2" />
           <entry key="JSON" value="9" />
@@ -97,7 +42,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="6070" />
+          <entry key="dart" value="6342" />
           <entry key="java" value="6" />
           <entry key="json" value="75" />
           <entry key="yaml" value="86" />
@@ -105,7 +50,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="6070" />
+          <entry key="Dart" value="6342" />
           <entry key="JAVA" value="6" />
           <entry key="JSON" value="75" />
           <entry key="YAML" value="86" />
@@ -118,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="175" column="39" lean-forward="true" selection-start-line="175" selection-start-column="39" selection-end-line="175" selection-end-column="39" />
+            <state relative-caret-position="210">
+              <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -170,10 +115,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/10.json">
+        <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/ui/geometry.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+            <state relative-caret-position="297">
+              <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -209,8 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LinearGradient</find>
-      <find>walkFrame</find>
       <find>textLayout</find>
       <find>P</find>
       <find>P</find>
@@ -239,6 +182,8 @@
       <find>ui.</find>
       <find>clear</find>
       <find>++</find>
+      <find>text</find>
+      <find>text(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -453,13 +398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/ui/geometry.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="1080" column="8" selection-start-line="1080" selection-start-column="8" selection-end-line="1080" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/flutter/bin/cache/dart-sdk/lib/async/zone.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -570,10 +508,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/ui/geometry.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="175" column="39" lean-forward="true" selection-start-line="175" selection-start-column="39" selection-end-line="175" selection-end-column="39" />
+        <state relative-caret-position="210">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
         </state>
       </provider>
     </entry>
