@@ -37,13 +37,10 @@ class LightsOut {
     rot += 0.8 * delta;
     diff = max(0, diff - 1);
 
-    var dpr = window.devicePixelRatio;
-    var paintBounds = Offset.zero & (window.physicalSize / dpr);
-    var logicalSize = window.physicalSize / dpr;
-    var physicalBounds = Offset.zero & (logicalSize * dpr);
     var sb = SceneBuilder()
-      ..pushClipRect(physicalBounds)
-      ..addPicture(Offset.zero, paint(paintBounds))
+      ..pushClipRect(Offset.zero & window.physicalSize)
+      ..addPicture(Offset.zero,
+          paint(Offset.zero & (window.physicalSize / window.devicePixelRatio)))
       ..pop();
     window.render(sb.build());
     window.scheduleFrame();
@@ -80,9 +77,12 @@ class LightsOut {
 
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 5; x++) {
-        c.drawRRect(RRect.fromRectXY(Rect.fromLTWH(X + Q * x, Y + Q * y, P, P), 8, 8), panels[y][x] > 0 ? on : off);
+        c.drawRRect(
+            RRect.fromRectXY(Rect.fromLTWH(X + Q * x, Y + Q * y, P, P), 8, 8),
+            panels[y][x] > 0 ? on : off);
         if (state == 0) {
-          text(c, '${y * 5 + x + 1}', 64, X + 24 + Q * x, Y + 24 + Q * y, result[y * 5 + x] == 0);
+          text(c, '${y * 5 + x + 1}', 64, X + 24 + Q * x, Y + 24 + Q * y,
+              result[y * 5 + x] == 0);
         }
       }
     }
@@ -155,11 +155,16 @@ class LightsOut {
     return true;
   }
 
-  text(Canvas c, String text, double size, double x, double y, [bool on = true]) {
+  text(Canvas c, String text, double size, double x, double y,
+      [bool on = true]) {
     var builder = ParagraphBuilder(ParagraphStyle())
-      ..pushStyle(ui.TextStyle(fontFamily: 'Roboto-Thin', color: Color(on ? 0xddffffff : 0x44ffffff), fontSize: size))
+      ..pushStyle(ui.TextStyle(
+          fontFamily: 'Roboto-Thin',
+          color: Color(on ? 0xddffffff : 0x44ffffff),
+          fontSize: size))
       ..addText(text);
-    c.drawParagraph(builder.build()..layout(ParagraphConstraints(width: W)), Offset(x, y));
+    c.drawParagraph(
+        builder.build()..layout(ParagraphConstraints(width: W)), Offset(x, y));
   }
 
   loadStage() async {
