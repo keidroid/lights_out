@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 main() => LightsOut().run();
 
 class LightsOut {
-  static const W = 720.0, H = 1280.0, P = 120.0, Q = 140.0, X = 20.0, Y = 400.0;
+  static const W = 720.0, H = 1280.0, P = 120.0, Q = 140.0, X = 20.0, Y = 360.0;
   int frame = 0, step = 0, clear = 0, stage = 0, state = 9, next = 0, diff = 0;
   double rot = 0.0;
   List<List<int>> panels;
@@ -57,7 +57,7 @@ class LightsOut {
     c.drawRect(screen, Paint()..shader = gradient);
 
     c.save();
-    c.translate(360, 740);
+    c.translate(360, 700);
     c.rotate(rot);
     c.drawOval(Rect.fromLTRB(-320.0, -300.0, 320.0, 300.0), bg);
     c.drawOval(Rect.fromLTRB(-300.0, -320.0, 300.0, 320.0), bg);
@@ -76,19 +76,19 @@ class LightsOut {
     }
 
     if (state == 0) {
-      text(c, 'Lights Out', 128, 80, 160);
-      if (!result.contains(0)) text(c, 'Thank you for playing!!', 64, 48, 1100);
+      text(c, 'Lights Out', 128, 80, 120);
+      if (!result.contains(0)) text(c, 'Thank you for playing!!', 64, 48, 1060);
     } else {
-      text(c, 'Stage', 64, 40, 180);
-      text(c, '$stage', 128, 40, 240);
-      text(c, 'Step', 64, 360, 180);
-      text(c, '$step / $clear', 128, 360, 240);
+      text(c, 'Stage', 64, 40, 140);
+      text(c, '$stage', 128, 40, 200);
+      text(c, 'Step', 64, 360, 140);
+      text(c, '$step / $clear', 128, 360, 200);
     }
     if (state == 3) {
-      text(c, 'Success!', 96, 160, 1100.0 + diff * diff);
+      text(c, 'Success!', 96, 160, 1060.0 + diff * diff);
     }
     if (state == 4) {
-      text(c, 'Failed..', 96, 220, 1100.0 + diff * diff);
+      text(c, 'Failed..', 96, 220, 1060.0 + diff * diff);
     }
     return r.endRecording();
   }
