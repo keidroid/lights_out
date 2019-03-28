@@ -13,7 +13,7 @@ class LightsOut {
   int frame = 0, step = 0, clear = 0, stage = 0, state = 9, next = 0, diff = 0;
   double rot = 0.0;
   List<List<int>> panels;
-  List<int> succeeded = List.generate(25, (_) => 0);
+  List<int> result = List.generate(25, (_) => 0);
 
   run() {
     window.onPointerDataPacket = handlePointerDataPacket;
@@ -82,7 +82,7 @@ class LightsOut {
       for (int x = 0; x < 5; x++) {
         c.drawRRect(RRect.fromRectXY(Rect.fromLTWH(X + Q * x, Y + Q * y, P, P), 8, 8), panels[y][x] > 0 ? on : off);
         if (state == 0) {
-          text(c, '${y * 5 + x + 1}', 64, 44 + Q * x, 424 + Q * y, succeeded[y * 5 + x] == 0);
+          text(c, '${y * 5 + x + 1}', 64, X + 24 + Q * x, Y + 24 + Q * y, result[y * 5 + x] == 0);
         }
       }
     }
@@ -119,7 +119,7 @@ class LightsOut {
           toggleX(x, y);
           step++;
           if (isOuts()) {
-            succeeded[stage - 1] = 1;
+            result[stage - 1] = 1;
             next = 3;
           } else if (clear == step) {
             next = 4;
