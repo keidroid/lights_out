@@ -13,7 +13,7 @@ class LightsOut {
   int frame = 0, step = 0, clear = 0, stage = 0, state = 9, next = 0, diff = 0;
   double rot = 0.0;
   List<List<int>> panels;
-  List<int> result = List.generate(25, (_) => 0);
+  List<int> result = List.filled(25, 0);
 
   run() {
     window.onPointerDataPacket = handlePointerDataPacket;
@@ -28,6 +28,7 @@ class LightsOut {
       state = next;
       diff = 8;
     }
+
     var ms = timeStamp.inMilliseconds;
     if (ms - frame >= 100) {
       frame = ms;
@@ -55,25 +56,12 @@ class LightsOut {
     c.scale(ratio, ratio);
     c.drawRect(screen, Paint()..shader = gradient);
 
-    var bg = Paint()
-      ..color = Color(0x10ffffff)
-      ..maskFilter = solid(5);
-
     c.save();
     c.translate(360, 740);
     c.rotate(rot);
     c.drawOval(Rect.fromLTRB(-320.0, -300.0, 320.0, 300.0), bg);
     c.drawOval(Rect.fromLTRB(-300.0, -320.0, 300.0, 320.0), bg);
     c.restore();
-
-    var on = Paint()
-      ..color = Color(0xaaffffff)
-      ..maskFilter = solid(50);
-
-    var off = Paint()
-      ..color = Color(0xaaffffff)
-      ..style = PaintingStyle.stroke
-      ..maskFilter = solid(5);
 
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 5; x++) {
@@ -89,6 +77,7 @@ class LightsOut {
 
     if (state == 0) {
       text(c, 'Lights Out', 128, 80, 160);
+      if (!result.contains(0)) text(c, 'Thank you for playing!!', 64, 48, 1100);
     } else {
       text(c, 'Stage', 64, 40, 180);
       text(c, '$stage', 128, 40, 240);
@@ -96,10 +85,10 @@ class LightsOut {
       text(c, '$step / $clear', 128, 360, 240);
     }
     if (state == 3) {
-      text(c, 'Success!', 96, 160, 1080.0 + diff * diff);
+      text(c, 'Success!', 96, 160, 1100.0 + diff * diff);
     }
     if (state == 4) {
-      text(c, 'Failed..', 96, 220, 1080.0 + diff * diff);
+      text(c, 'Failed..', 96, 220, 1100.0 + diff * diff);
     }
     return r.endRecording();
   }
@@ -187,4 +176,17 @@ class LightsOut {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ).createShader(screen);
+
+  get bg => Paint()
+    ..color = Color(0x10ffffff)
+    ..maskFilter = solid(5);
+
+  get on => Paint()
+    ..color = Color(0xaaffffff)
+    ..maskFilter = solid(50);
+
+  get off => Paint()
+    ..color = Color(0xaaffffff)
+    ..style = PaintingStyle.stroke
+    ..maskFilter = solid(5);
 }
