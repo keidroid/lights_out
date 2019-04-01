@@ -1,6 +1,13 @@
 # lights_out
 
-A new Flutter project.
+It is a 5x5 lights out game.
+It is all 25 stages.
+Enjoy!
+
+## Notes
+
+- Supports only portrait mode.
+- Supports only devices with aspect ratio of 3:2 or more.
 
 ## License
 
