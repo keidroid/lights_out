@@ -88,8 +88,8 @@ class LightsOut {
     } else {
       text(c, 'Stage', 64, 40, 60);
       text(c, '$stage', 128, 40, 120);
-      text(c, 'Step', 64, 360, 60);
-      text(c, '$step / $clear', 128, 360, 120);
+      text(c, 'Step', 64, 280, 60);
+      text(c, '$step / $clear', 128, 280, 120);
     }
     if (state == 3) {
       text(c, 'Success!', 96, 160, 980.0 + diff * diff);
