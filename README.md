@@ -1,5 +1,7 @@
 # lights_out
 
+<img src="./screenshot1.png" height="500" alt="Title" /> <img src="./screenshot2.png" height="500" alt="Stage" />
+
 It is a 5x5 lights out game.
 It is all 25 stages.
 Enjoy!
