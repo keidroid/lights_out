@@ -89,6 +89,10 @@ flutter:
 # for flutter_web 3/3
 dependency_overrides:
   flutter_web:
-    path: ./packages/flutter_web
+    git:
+      url: https://github.com/flutter/flutter_web
+      path: packages/flutter_web
   flutter_web_ui:
-    path: ./packages/flutter_web_ui
+    git:
+      url: https://github.com/flutter/flutter_web
+      path: packages/flutter_web_ui
