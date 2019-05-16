@@ -1,0 +1,12 @@
+{
+  "lang": "en",
+  "name": "Lights Out",
+  "short_name": "Lights Out",
+  "icons": [{
+        "src": "/icon144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }],
+  "start_url": "https://fir-6c1ee.firebaseapp.com/",
+  "display": "standalone"
+}
